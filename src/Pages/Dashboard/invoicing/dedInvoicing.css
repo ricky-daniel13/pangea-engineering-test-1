@@ -1,0 +1,61 @@
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  th {
+    background-color: black;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px; /* reduce margin-bottom */
+}
+
+.button-container button {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+}
+
+.button-container button:hover {
+    background-color: #f2f2f2;
+}
+
+table, th, td {
+    border-right: 1px solid #ddd !important;
+    text-align: left;
+}
+  
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+ 
+  
+  .invoice-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 260px;
+    max-width: 110rem;
+  }
+  
+ 
+ 

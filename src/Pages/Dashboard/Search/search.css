@@ -1,0 +1,102 @@
+.content {
+    display: flex;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+  }
+  
+  .left-column {
+    width: 75%;
+  }
+  
+  .right-column {
+    width: 25%;
+  }
+  
+  .filter-section {
+    /* Add styling for your filter section */
+  }
+  
+  .csv-table {
+    /* Adjust the styling as needed */
+  }
+  
+  .csv-table table {
+    width: 100%;
+    /* Additional table styling */
+  }
+  .filterSection {
+    background-color: #e0e0e0; /* Greyish background */
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .filterGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filterGroup > * {
+    margin-bottom: 8px;
+  }
+  
+  .rightColumn {
+    background-color: #ffffff; /* White background or any other color */
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .leftColumn {
+    background-color: #f9f9f9; /* Slightly off-white background */
+    padding: 16px;
+  }
+  
+  /* Custom button styles */
+  .button {
+    margin-top: 8px;
+    margin-right: 8px;
+  }
+  
+  /* Add other styles as needed */
+  .dashboard .content {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .dashboard .filterSection {
+    background-color: #f0f0f0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .dashboard .filterGroup {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  /* search.css */
+.csvTable th, .csvTable td {
+  padding: 8px 10px; /* Adjust padding as needed */
+}
+
+.csvTable tr {
+  line-height: 1.2; /* Tighten up row height */
+}
+
+  /* Rest of your CSS */
+  

@@ -1,0 +1,55 @@
+{
+  "name": "blitz",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@date-io/date-fns": "^3.0.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/pickers": "^3.3.11",
+    "@mui/icons-material": "^5.15.11",
+    "@mui/material": "^5.15.15",
+    "@mui/styles": "^5.15.15",
+    "axios": "^1.6.7",
+    "cors": "^2.8.5",
+    "jotai": "^2.7.1",
+    "js-cookie": "^3.0.5",
+    "modal": "^1.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.4",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.22.2",
+    "react-scripts": "^4.0.3",
+    "react-simple-maps": "^3.0.0",
+    "recharts": "^2.12.4",
+    "styled-components": "^6.1.8",
+    "web-vitals": "^3.5.2"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
+}

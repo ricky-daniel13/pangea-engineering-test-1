@@ -1,0 +1,132 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100vh;
+  padding: 2rem 2rem;
+  background-color: #000;
+  box-shadow: 1rem 1rem -1rem rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 12rem;
+}
+
+.logo img {
+  height: 6rem;
+  width: 12rem;
+  background-color: #000;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 4rem;
+  width: 100%;
+  
+  text-emphasis-color: white;
+  border-top: 1px solid #000; /* You can replace #000 with any color you want for the divider */
+  border-bottom: 1px solid #000; /* You can replace #000 with any color you want for the divider */
+}
+.menu-item {
+  position: relative;
+}
+
+.menu-item .submenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%; /* Position the submenu right below the 'Search' item */
+  padding-left: 20px; /* Indent submenu items */
+  margin-top: 0; /* Adjust if necessary to align perfectly */
+  background: #000; /* Match the background color with the navbar for seamless appearance */
+  border: none; /* Remove if you have any border set */
+  width: max-content; /* Ensure the width matches its content or parent */
+}
+.menu-item:hover .submenu {
+  display: block;
+}
+.menu li, .submenu li {
+  width: 100%; /* Ensure submenu items also take full width */
+}
+.menu a, .submenu a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: white;
+  transition: color 0.3s;
+  display: flex;
+  align-items: left;
+  padding: 12px 0;
+}
+.menu a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: white;
+  transition: color 0.3s;
+  display: flex;
+  box-shadow: 1rem 0 1rem -1rem rgba(0, 0, 0, 0.1);
+  align-items: left;
+  height: 4rem;
+}
+
+.submenu a {
+  padding: 10px 20px; /* Adjust padding to match main menu items if necessary */
+  color: white; /* Ensure text color consistency */
+  font-size: 1.6rem; /* Adjust font size to match the design of main menu items */
+}
+.menu a:hover, .submenu a:hover {
+  color: cyan;
+}
+
+.menu li, .submenu li {
+  width: 100%;
+  margin-bottom: 2rem; /* Adjust or remove based on your spacing preference */
+  padding: 10px 0; 
+
+}
+.menu a svg {
+  margin-right: 1.5rem;
+  font-size: 2rem;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+align-items: center;
+box-shadow: 3rem 3rem 3rem 3rem rgba(0, 0, 0, 0.15);
+}
+
+.profile-photo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between img and text */
+  margin-right: 10px;
+}
+.profile-photo img {
+  height: 75px;
+  border-radius: 30%;
+  width: 75px; /* This ensures the image isn't too large. Adjust as needed. */
+}
+
+.user-tab, .user-info {
+  margin-top: -12px;
+}
+
+.user-tab, .enterprise {
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  margin-top: 12px;
+}
+
+.enterprise {
+  font-style: italic;
+}
