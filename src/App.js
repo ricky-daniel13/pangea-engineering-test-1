@@ -43,15 +43,6 @@ function App() {
           <Route path={routes.register} element={<><PageTitle title="Register - Blitz" /><Register /></>} />
           <Route path={routes.creatorSignup} element={<><PageTitle title="Creator Signup - Blitz" /><CreatorSignup /></>} />
           <Route path={routes.creatorConnect} element={<><PageTitle title="Creator Connect - Blitz" /><CreatorConnect /></>} />
-
-          <Route path={routes.dashboard} element={<PrivateRoute><PageTitle title="Dashboard - Blitz" /><Dashboard /></PrivateRoute>} />
-          <Route path={routes.user} element={<PrivateRoute><PageTitle title="User Management - Blitz" /><User /></PrivateRoute>} />
-          <Route path={routes.invoicing} element={<PrivateRoute><PageTitle title="Invoicing - Blitz" /><Invoicing /></PrivateRoute>} />
-          <Route path={routes.campaigns} element={<PrivateRoute><PageTitle title="Campaigns - Blitz" /><Campaigns /></PrivateRoute>} />
-          <Route path={routes.search} element={<PrivateRoute><PageTitle title="Search - Blitz" /><Search /></PrivateRoute>} />
-          <Route path={routes.blitzpay} element={<PrivateRoute><PageTitle title="Blitz - Payouts" /><BlitzPay /></PrivateRoute>} />
-          <Route path={routes.addCreators} element={<PrivateRoute><PageTitle title="Add Creators - Blitz" /><AddCreators /></PrivateRoute>} />
-          <Route path={routes.company} element={<PrivateRoute><PageTitle title="Company List - Blitz" /><CompanyList /></PrivateRoute>} />
           <Route path={routes.campaignReport} element={<><PageTitle title="Campaign Details - Blitz" /><CampaignDetailsPage /></>} />
           <Route path={routes.creatorMediaKit} element={<><PageTitle title="Creator Media Kit - Blitz" /><CreatorDetailsPage /></>} />
           <Route path={routes.roster} element={<AgencyCreatorRoster />} />  {/* New Route */}
