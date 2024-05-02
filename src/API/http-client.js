@@ -37,15 +37,8 @@ Axios.interceptors.response.use(
 
 export class HttpClient {
   static async get(url, params = null) {
-    try {
-      console.log("Fullfiling: ", url);
-      const response = await Axios.get(url, { params });
-      return response.data;
-    } catch (error) {
-      console.log("Error:", error);
-      throw error;
-    }
-    
+    const response = await Axios.get(url, { params });
+    return response.data;
   }
 
   static async post(url, data) {

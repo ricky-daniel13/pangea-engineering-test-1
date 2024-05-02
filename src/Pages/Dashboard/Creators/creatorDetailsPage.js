@@ -31,14 +31,14 @@ import blitzLogo from "../../../Components/globalAssets/platty.png";
 import routes from "../../../Config/routes";
 import profilePhoto from "../../../Components/globalAssets/ppfLogo.png"; // Placeholder for the profile photo
 const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
-const mapCountryToIsoA3 = (country) => {
+  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const mapCountryToGeoName = (country) => {
   const countryMap = {
-    USA: "USA",
-    UK: "GBR",
-    Mexico: "MEX",
-    Canada: "CAN",
-    Colombia: "COL",
+    USA: "United States of America",
+    UK: "United Kingdom",
+    Mexico: "Mexico",
+    Canada: "Canada",
+    Colombia: "Colombia",
     // Add more mappings as necessary
   };
   return countryMap[country] || null;
@@ -53,7 +53,6 @@ const CreatorDetailsPage = () => {
       setLoading(true);
       try {
         const response = await client.creators.fetchDetails(creatorId);
-        console.log("Received response:", response);
         console.log(client);
 
         // Directly use the response assuming 'response' already contains the data object
@@ -78,7 +77,7 @@ const CreatorDetailsPage = () => {
   }, [creatorId]);
 
   const highlightedCountries = ["USA", "UK", "Mexico", "Canada", "Colombia"]
-  .map(mapCountryToIsoA3)
+  .map(mapCountryToGeoName)
   .filter(Boolean);
 
 const followersData = useMemo(()=>{
@@ -251,7 +250,7 @@ const promotionData = useMemo(()=>{
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="value" fill="#8884d8" />
+              <Bar dataKey="value" name="Rate" fill="#8884d8" />
             </BarChart>
           </ResponsiveContainer>
           <List>
@@ -278,21 +277,17 @@ const promotionData = useMemo(()=>{
   <Geographies geography={geoUrl}>
     {({ geographies }) =>
       geographies.map((geo) => {
-        const isHighlighted = highlightedCountries.includes(geo.properties.ISO_A3);
-        return isHighlighted ? (
+        
+        const isHighlighted = highlightedCountries.includes(geo.properties.name);
+        //console.log("Geo: ", geo.properties.name, " isHighlighted?: ", isHighlighted);
+        return (
           <Geography
             key={geo.rsmKey}
             geography={geo}
-            fill="#FF5533"
+            fill={isHighlighted ? "#FF5533" : "#DDD"}
           />
-        ) : null; // Don't render unhighlighted geographies to clean up the map
-      }).length > 0 ? geographies.map(geo => (
-        <Geography
-          key={geo.rsmKey}
-          geography={geo}
-          fill="#DDD"
-        />
-      )) : <Typography sx={{ textAlign: 'center' }}>Creator can't be mapped.</Typography>
+        )
+      })
     }
   </Geographies>
 </ComposableMap>
