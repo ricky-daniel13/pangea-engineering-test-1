@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import client from "../../../API"; // Adjust this import to your actual API client's location
 import {
@@ -70,10 +70,54 @@ const CreatorDetailsPage = () => {
       }
     };
 
+    console.log("Loading creator details");
+
     if (creatorId) {
       fetchCreatorDetails();
     }
   }, [creatorId]);
+
+  const highlightedCountries = ["USA", "UK", "Mexico", "Canada", "Colombia"]
+  .map(mapCountryToIsoA3)
+  .filter(Boolean);
+
+const followersData = useMemo(()=>{
+  return [
+    { name: "TikTok", value: parseInt(creatorDetails ? creatorDetails.tiktok : 0, 10) },
+    { name: "Instagram", value: parseInt(creatorDetails ? creatorDetails.instagram : 0, 10) },
+    { name: "YouTube", value: parseInt(creatorDetails ? creatorDetails.youtube : 0, 10) },
+  ];
+},[creatorDetails]);
+
+const parsePromotionDataNumbers = value => {
+  return parseFloat(value.replace('$', '').replace(',', '') || 0);
+};
+
+const formatPromotionValue = value => {
+  const numericValue = parseFloat(value.replace('$', '').replace(',', '') || 0);
+  return numericValue > 999 ? numericValue.toLocaleString() : numericValue.toFixed(2);
+};
+
+
+const promotionData = useMemo(()=>{
+  return[
+  {
+    name: "TikTok Sound",
+    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.tiktok_sound) : 0),
+  },
+  {
+    name: "TikTok Brand",
+    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.tiktok_brand) : 0),
+  },
+  {
+    name: "Instagram Sound",
+    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_reels_sound) : 0),
+  },
+  {
+    name: "Instagram Brand",
+    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_reels_brand) : 0),
+  },
+]},[creatorDetails]);
 
   if (loading) {
     return <Typography>Loading creator details...</Typography>;
@@ -82,39 +126,6 @@ const CreatorDetailsPage = () => {
   if (!creatorDetails) {
     return <Typography>No creator details found.</Typography>;
   }
-  const highlightedCountries = ["USA", "UK", "Mexico", "Canada", "Colombia"]
-    .map(mapCountryToIsoA3)
-    .filter(Boolean);
-
-  // Safely parse and calculate data for charts
-  const followersData = [
-    { name: "TikTok", value: parseInt(creatorDetails.tiktok || 0, 10) },
-    { name: "Instagram", value: parseInt(creatorDetails.instagram || 0, 10) },
-    { name: "YouTube", value: parseInt(creatorDetails.youtube || 0, 10) },
-  ];
-  const formatPromotionValue = value => {
-    const numericValue = parseFloat(value.replace('$', '').replace(',', '') || 0);
-    return numericValue > 999 ? numericValue.toLocaleString() : numericValue.toFixed(2);
-  };
-  const promotionData = [
-    {
-      name: "TikTok Sound",
-      value: (creatorDetails.tiktok_sound || ''),
-    },
-    {
-      name: "TikTok Brand",
-      value: (creatorDetails.tiktok_brand || ''),
-    },
-    {
-      name: "Instagram Sound",
-      value: (creatorDetails.instagram_sound || ''),
-    },
-    {
-      name: "Instagram Brand",
-      value: (creatorDetails.instagram_brand || ''),
-    },
-  ];
-  
 
   return (
     <>
