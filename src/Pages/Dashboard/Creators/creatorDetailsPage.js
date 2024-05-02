@@ -111,6 +111,14 @@ const CreatorDetailsPage = () => {
         value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.tiktok_brand) : 0),
       },
       {
+        name: "Instagram Story",
+        value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_story) : 0),
+      },
+      {
+        name: "Instagram Post",
+        value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_feed_post) : 0),
+      },
+      {
         name: "Instagram Sound",
         value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_reels_sound) : 0),
       },
