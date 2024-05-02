@@ -4,7 +4,7 @@ import { ConfigValue } from "../Config";
 
 // TODO: Due to windows timeout was set to 15000
 const Axios = axios.create({
-  baseURL: ConfigValue.PUBLIC_REST_API_ENDPOINT,
+  baseURL: "https://blitz-backend-nine.vercel.app/api",
   timeout: 120000, //150000000,
   headers: {
     "Content-Type": "application/json",
@@ -37,8 +37,15 @@ Axios.interceptors.response.use(
 
 export class HttpClient {
   static async get(url, params = null) {
-    const response = await Axios.get(url, { params });
-    return response.data;
+    try {
+      console.log("Fullfiling: ", url);
+      const response = await Axios.get(url, { params });
+      return response.data;
+    } catch (error) {
+      console.log("Error:", error);
+      throw error;
+    }
+    
   }
 
   static async post(url, data) {
