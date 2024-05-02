@@ -13,6 +13,7 @@ import {
   ListItem,
   ListItemText,
   Link,
+  Chip,
 } from "@mui/material";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import {
@@ -77,46 +78,47 @@ const CreatorDetailsPage = () => {
   }, [creatorId]);
 
   const highlightedCountries = ["USA", "UK", "Mexico", "Canada", "Colombia"]
-  .map(mapCountryToGeoName)
-  .filter(Boolean);
+    .map(mapCountryToGeoName)
+    .filter(Boolean);
 
-const followersData = useMemo(()=>{
-  return [
-    { name: "TikTok", value: parseInt(creatorDetails ? creatorDetails.tiktok : 0, 10) },
-    { name: "Instagram", value: parseInt(creatorDetails ? creatorDetails.instagram : 0, 10) },
-    { name: "YouTube", value: parseInt(creatorDetails ? creatorDetails.youtube : 0, 10) },
-  ];
-},[creatorDetails]);
+  const followersData = useMemo(() => {
+    return [
+      { name: "TikTok", value: parseInt(creatorDetails ? creatorDetails.tiktok : 0, 10) },
+      { name: "Instagram", value: parseInt(creatorDetails ? creatorDetails.instagram : 0, 10) },
+      { name: "YouTube", value: parseInt(creatorDetails ? creatorDetails.youtube : 0, 10) },
+    ];
+  }, [creatorDetails]);
 
-const parsePromotionDataNumbers = value => {
-  return parseFloat(value.replace('$', '').replace(',', '') || 0);
-};
+  const parsePromotionDataNumbers = value => {
+    return parseFloat(value.replace('$', '').replace(',', '') || 0);
+  };
 
-const formatPromotionValue = value => {
-  const numericValue = parseFloat(value.replace('$', '').replace(',', '') || 0);
-  return numericValue > 999 ? numericValue.toLocaleString() : numericValue.toFixed(2);
-};
+  const formatPromotionValue = value => {
+    const numericValue = parseFloat(value.replace('$', '').replace(',', '') || 0);
+    return numericValue > 999 ? numericValue.toLocaleString() : numericValue.toFixed(2);
+  };
 
 
-const promotionData = useMemo(()=>{
-  return[
-  {
-    name: "TikTok Sound",
-    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.tiktok_sound) : 0),
-  },
-  {
-    name: "TikTok Brand",
-    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.tiktok_brand) : 0),
-  },
-  {
-    name: "Instagram Sound",
-    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_reels_sound) : 0),
-  },
-  {
-    name: "Instagram Brand",
-    value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_reels_brand) : 0),
-  },
-]},[creatorDetails]);
+  const promotionData = useMemo(() => {
+    return [
+      {
+        name: "TikTok Sound",
+        value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.tiktok_sound) : 0),
+      },
+      {
+        name: "TikTok Brand",
+        value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.tiktok_brand) : 0),
+      },
+      {
+        name: "Instagram Sound",
+        value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_reels_sound) : 0),
+      },
+      {
+        name: "Instagram Brand",
+        value: (creatorDetails ? parsePromotionDataNumbers(creatorDetails.ig_reels_brand) : 0),
+      },
+    ]
+  }, [creatorDetails]);
 
   if (loading) {
     return <Typography>Loading creator details...</Typography>;
@@ -147,26 +149,26 @@ const promotionData = useMemo(()=>{
         </Toolbar>
       </AppBar>
       <Box sx={{ flexGrow: 1, padding: 3, backgroundColor: "#f5f5f5" }}>
-  <Grid container spacing={2} justifyContent="center" alignItems="center">
-    <Grid item xs={12} sm={4}>
-      <Box
-        component="img"
-        src={creatorDetails.pfphref || profilePhoto}
-        alt="Profile"
-        sx={{
-          width: '100%',
-          maxWidth: 120,
-          height: 'auto',
-          borderRadius: "50%",
-        }}
-      />
-    </Grid>
-    <Grid item xs={12} sm={8}>
-      <Typography variant="h4" gutterBottom>
-        @{creatorDetails.creator}
-        </Typography>
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          <Grid item xs={12} sm={4}>
+            <Box
+              component="img"
+              src={creatorDetails.pfphref || profilePhoto}
+              alt="Profile"
+              sx={{
+                width: '100%',
+                maxWidth: 120,
+                height: 'auto',
+                borderRadius: "50%",
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Typography variant="h4" gutterBottom>
+              @{creatorDetails.creator}
+            </Typography>
+          </Grid>
         </Grid>
-  </Grid>
         <Paper sx={{ padding: 2, margin: "20px 0" }}>
           <Typography variant="body1">
             <strong>TikTok Profile:</strong>{" "}
@@ -200,7 +202,7 @@ const promotionData = useMemo(()=>{
           </Typography>
           {/* Followers Distribution */}
           <Grid item xs={12} md={6}>
-          <Typography variant="body1">
+            <Typography variant="body1">
               <strong>Presented By:</strong> {creatorDetails.manager}
             </Typography>
             <Typography variant="body1">
@@ -270,27 +272,30 @@ const promotionData = useMemo(()=>{
             <strong>Geolocation & Ethnicity:</strong>{" "}
             {creatorDetails.geolocation_gender_ethnicity}
           </Typography>
-          <Typography variant="body1">
-            <strong>Content Style:</strong> {creatorDetails.notes_content_style}
-          </Typography>
+          <Box style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
+            <Typography variant="body1"><strong>Content Style:</strong></Typography>
+            {creatorDetails.notes_content_style.split(',').map((tag) => (
+              <Chip label={tag} key={tag} color="primary" style={{ marginInline: "0.5em" }}></Chip>
+            ))}
+          </Box>
           <ComposableMap>
-  <Geographies geography={geoUrl}>
-    {({ geographies }) =>
-      geographies.map((geo) => {
-        
-        const isHighlighted = highlightedCountries.includes(geo.properties.name);
-        //console.log("Geo: ", geo.properties.name, " isHighlighted?: ", isHighlighted);
-        return (
-          <Geography
-            key={geo.rsmKey}
-            geography={geo}
-            fill={isHighlighted ? "#FF5533" : "#DDD"}
-          />
-        )
-      })
-    }
-  </Geographies>
-</ComposableMap>
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo) => {
+
+                  const isHighlighted = highlightedCountries.includes(geo.properties.name);
+                  //console.log("Geo: ", geo.properties.name, " isHighlighted?: ", isHighlighted);
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill={isHighlighted ? "#FF5533" : "#DDD"}
+                    />
+                  )
+                })
+              }
+            </Geographies>
+          </ComposableMap>
 
         </Paper>
       </Box>
