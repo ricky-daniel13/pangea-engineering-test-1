@@ -81,16 +81,10 @@ const CreatorDetailsPage = () => {
     .map(mapCountryToGeoName)
     .filter(Boolean);
 
-  const followersData = useMemo(() => {
-    return [
-      { name: "TikTok", value: parseInt(creatorDetails ? creatorDetails.tiktok : 0, 10) },
-      { name: "Instagram", value: parseInt(creatorDetails ? creatorDetails.instagram : 0, 10) },
-      { name: "YouTube", value: parseInt(creatorDetails ? creatorDetails.youtube : 0, 10) },
-    ];
-  }, [creatorDetails]);
+
 
   const parsePromotionDataNumbers = value => {
-    return parseFloat(value.replace('$', '').replace(',', '') || 0);
+    return parseFloat(value.replaceAll('$', '').replaceAll(',', '') || 0);
   };
 
   const formatPromotionValue = value => {
@@ -98,6 +92,13 @@ const CreatorDetailsPage = () => {
     return numericValue > 999 ? numericValue.toLocaleString() : numericValue.toFixed(2);
   };
 
+    const followersData = useMemo(() => {
+    return [
+      { name: "TikTok", value: parsePromotionDataNumbers(creatorDetails ? creatorDetails.tiktok : "0") },
+      { name: "Instagram", value: parsePromotionDataNumbers(creatorDetails ? creatorDetails.instagram : "0") },
+      { name: "YouTube", value: parsePromotionDataNumbers(creatorDetails ? creatorDetails.youtube : "0") },
+    ];
+  }, [creatorDetails]);
 
   const promotionData = useMemo(() => {
     return [
@@ -231,7 +232,7 @@ const CreatorDetailsPage = () => {
                   {followersData.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={["#0088FE", "#00C49F", "#FFBB28"][index]}
+                      fill={["#02010f", "#eb2d9f", "#e01e14"][index]}
                     />
                   ))}
                 </Pie>
